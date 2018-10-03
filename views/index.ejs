@@ -7,5 +7,13 @@
   <body>
     <h1><%= title %></h1>
     <p>Welcome to <%= title %></p>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.1/socket.io.js"></script>
+    <script>
+      var socket = io();
+      socket.on('connect', function(data) {
+        console.log('connected');
+        socket.emit('join', 'Hello World from client');
+      });
+    </script>
   </body>
 </html>
