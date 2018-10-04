@@ -4,8 +4,8 @@ module.exports = function (server) {
   io.on('connection', function (client) {
     console.log('Client connected...')
 
-    client.on('join', function (data) {
-      console.log(data)
+    client.on('message', function (data) {
+      console.log('message receive from client: ', data)
     })
   })
 }
