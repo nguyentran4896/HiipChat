@@ -17,7 +17,7 @@ export class WebsocketService {
     this.socket = io('http://localhost:3000');
 
     let observable = new Observable(observer => {
-      this.socket.on('refreshing', (data) => {
+      this.socket.on('refreshed messages', (data) => {
         console.log('Receive a message from server');
         observer.next(data);
       })

@@ -10,6 +10,8 @@ module.exports = server => {
       console.log('message receive from client: ', data.content)
       try {
         await messageServices.addMessage(data)
+        const messages = await messageServices.getAll()
+        io.emit('refreshed messages', messages)
       } catch (error) {
         console.log('Socket connection message: ', error)
       }
