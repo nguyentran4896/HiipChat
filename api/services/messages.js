@@ -28,12 +28,16 @@ class MessagesService extends BaseController {
   }
 
   async addMessage (data) {
-    const message = this.getValidDocumentForInsert(data)
+    try {
+      const message = this.getValidDocumentForInsert(data)
 
-    const messageCreated = await this.findOrCreate(message)
-    const newMessageId = messageCreated._id.toString()
-    const newMessage = await this.getSingleMessage(newMessageId)
-    return newMessage
+      const messageCreated = await this.create(message)
+      const newMessageId = messageCreated._id.toString()
+      const newMessage = await this.getSingleMessage(newMessageId)
+      return newMessage
+    } catch (error) {
+      console.log('addMessage', error)
+    }
   }
 
   async deleteMessage (messageId) {
@@ -50,6 +54,7 @@ class MessagesService extends BaseController {
       updated: null
     }
 
+    message.userCreated = parse.getObjectIDIfValid(data.userCreated)
     message.content = parse.getString(data.content)
 
     return message

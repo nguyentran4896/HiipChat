@@ -7,7 +7,7 @@ const MessageSchema = new Schema({
     default: '',
     required: true
   },
-  userCreate: {
+  userCreated: {
     type: Schema.Types.ObjectId,
     ref: 'User',
     required: true
