@@ -30,7 +30,7 @@ export class WebsocketService {
       next: (data: Object) => {
         this.socket.emit('message', {
           userCreated: '5bb70e278026100f444ca7ec',
-          content: 'test content'
+          content: data
         });
       }
     }

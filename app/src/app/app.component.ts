@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { ChatService } from './chat.service';
 
-
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -10,15 +9,25 @@ import { ChatService } from './chat.service';
 export class AppComponent {
   title = 'hiip-chat';
 
+  messages: any[] = []
+  content: String = ''
+
+  setMessages(arr) {
+    this.messages = arr
+  }
+
   constructor(private chat: ChatService) {}
 
   ngOnInit() {
     this.chat.messages.subscribe(msg => {
-      console.log(msg);
+      console.log('msg', msg);
+      
+      this.setMessages(msg)
     })
   }
 
-  sendMessage() {
-    this.chat.sendMsg('test message');
+  sendMessage(content) {
+    if (!content) return
+    this.chat.sendMsg(content);
   }
 }
