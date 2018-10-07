@@ -83,6 +83,11 @@ img {
     position: relative;
 }
 
+.avatar img {
+    width: 60px;
+    height: 60px;
+}
+
 .base_receive>.avatar:after {
     content: "";
     position: absolute;
@@ -136,4 +141,8 @@ img {
     position: fixed;
     left: 0px;
     bottom: 0;
+}
+
+.panel-body {
+    max-height: 80vh;
 }

@@ -18,7 +18,6 @@ export class WebsocketService {
 
     let observable = new Observable(observer => {
       this.socket.on('refreshed messages', (data) => {
-        console.log('Receive a message from server');
         observer.next(data);
       })
       return () => {

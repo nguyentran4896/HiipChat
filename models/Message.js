@@ -11,7 +11,9 @@ const MessageSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: 'User',
     required: true
-  }
+  },
+  updated: Date,
+  created: Date
 }, { usePushEach: true })
 
 mongoose.model('Message', MessageSchema)
