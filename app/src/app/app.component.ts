@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { ChatService } from './chat.service';
+import { ApiService } from './api.service'
 
 @Component({
   selector: 'app-root',
@@ -8,10 +9,13 @@ import { ChatService } from './chat.service';
 })
 
 export class AppComponent {
+  constructor(private chat: ChatService, private api: ApiService) {}
   title = 'hiip-chat';
 
   messages: any[] = []
   content: String = ''
+  userName: String = ''
+  isLogined: Boolean = false
 
   setMessages(arr) {
     this.messages = arr.map(x => {
@@ -21,17 +25,24 @@ export class AppComponent {
     setTimeout(this.scrollToBottom)
   }
 
+  async setUserName(name) {
+    this.userName = name || ''
+    this.isLogined = true
+    setTimeout(this.scrollToBottom)
+    await this.api.createUser(name).subscribe()
+  }
+
   scrollToBottom() {
     var objDiv = document.getElementById('messages-wrapper')
     objDiv.scrollTop = objDiv.scrollHeight
   }
 
-  constructor(private chat: ChatService) {}
 
   ngOnInit() {
     this.chat.messages.subscribe(msg => {
       this.setMessages(msg)
     })
+    this.userName = localStorage.getItem('userName') || ''
   }
 
   sendMessage(content) {

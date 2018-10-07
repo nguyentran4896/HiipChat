@@ -1,4 +1,28 @@
-<div class="container-fluid">
+<div [hidden]="!!isLogined" class="container-fluid" style="margin-top: 20px">
+    <div class="container">
+        <div class="row chat-window col-md-12" id="chat_window_1" style="margin-left:10px;">
+            <div class="col-xs-12 offset-xs-0 col-md-10 offset-md-1">
+                <div class="panel panel-default">
+                    <div class="panel-heading top-bar">
+                        <div class="container-fluid">
+                            <h3 class="panel-title">Nhập tên và nhấn enter để chat</h3>
+                        </div>
+                    </div>
+                    <div class="panel-body msg_container_base">
+                        <div class="container">
+                            <div class="col-5">
+                                <input type="text" [(ngModel)]="userName" name="name" placeholder="Nhập tên" class="form-control input-sm"
+                                    (keyup.enter)="setUserName(userName)" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div [hidden]="!isLogined" class="container-fluid" style="margin-top: 20px">
     <div class="container">
         <div class="row chat-window col-md-12" id="chat_window_1" style="margin-left:10px;">
             <div class="col-xs-12 offset-xs-0 col-md-10 offset-md-1">
