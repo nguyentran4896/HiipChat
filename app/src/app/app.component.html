@@ -13,7 +13,7 @@
                             <div class="col-md-10 col-xs-10">
                                 <div class="messages msg_sent">
                                     <p>{{ message.content }}</p>
-                                    <time>Nguyen Van A • {{ message.timeFromNow }}</time>
+                                    <time>{{ message.userCreated.name || 'user' }} • {{ message.timeFromNow }}</time>
                                 </div>
                             </div>
                             <div class="col-md-2 col-xs-2 avatar">

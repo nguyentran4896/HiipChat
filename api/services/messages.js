@@ -13,8 +13,8 @@ class MessagesService extends BaseController {
     const limit = parse.getNumberIfPositive(params.limit) || 1000
     const offset = parse.getNumberIfPositive(params.offset) || 0
 
-    return this.getAll(offset, limit).then(data => {
-      return data.map(message => this.changeProperties(message))
+    return this.getAll(offset, limit).then(async data => {
+      return await Promise.all(data.map(async message => await this.changeProperties(message)))
     })
   }
 
@@ -76,9 +76,10 @@ class MessagesService extends BaseController {
     return message
   }
 
-  changeProperties (message) {
+  async changeProperties (message) {
     if (message) {
       message = JSON.parse(JSON.stringify(message))
+      message.userCreated = (await require('./users').getSingleUser(message.userCreated)) || {}
       message.id = message._id.toString()
       delete message._id
       delete message.__v
