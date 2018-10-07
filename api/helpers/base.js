@@ -22,9 +22,9 @@ class BaseController {
   async findOrCreate (obj) {
     const query = {}
     if (obj.name) query.name = obj.name
-    const data = this.Model.findOne(query)
+    const data = await this.Model.findOne(query)
     if (data) return data
-    return this.Model.create(obj)
+    return await this.Model.create(obj)
   }
 }
 

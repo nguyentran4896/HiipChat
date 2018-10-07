@@ -28,12 +28,16 @@ class UsersService extends BaseController {
   }
 
   async addUser (data) {
-    const user = this.getValidDocumentForInsert(data)
+    try {
+      const user = this.getValidDocumentForInsert(data)
 
-    const userCreated = await this.findOrCreate(user)
-    const newUserId = userCreated._id.toString()
-    const newUser = await this.getSingleUser(newUserId)
-    return newUser
+      const userCreated = await this.findOrCreate(user)
+      const newUserId = userCreated._id.toString()
+      const newUser = await this.getSingleUser(newUserId)
+      return newUser
+    } catch (error) {
+      console.log('addUser', error)
+    }
   }
 
   async deleteUser (userId) {
