@@ -27,9 +27,11 @@ export class WebsocketService {
 
     let observer = {
       next: (data: Object) => {
+        data = JSON.parse(data.toString());
+
         this.socket.emit('message', {
-          userCreated: '5bb70e278026100f444ca7ec',
-          content: data
+          userCreated: data.id,
+          content: data.content
         });
       }
     }

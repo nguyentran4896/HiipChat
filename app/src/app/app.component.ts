@@ -16,6 +16,7 @@ export class AppComponent {
   content: String = ''
   userName: String = ''
   isLogined: Boolean = false
+  userId: String = ''
 
   setMessages(arr) {
     this.messages = arr.map(x => {
@@ -29,7 +30,9 @@ export class AppComponent {
     this.userName = name || ''
     this.isLogined = true
     setTimeout(this.scrollToBottom)
-    await this.api.createUser(name).subscribe()
+    let res = await this.api.createUser(name)
+    this.userId = res.id
+    console.log(res);
   }
 
   scrollToBottom() {
@@ -47,7 +50,10 @@ export class AppComponent {
 
   sendMessage(content) {
     if (!content) return
-    this.chat.sendMsg(content);
+    this.chat.sendMsg(JSON.stringify({
+      content: content,
+      id: this.userId
+    }));
     this.content = ''
   }
 
