@@ -33,9 +33,9 @@
                         </div>
                     </div>
                     <div id="messages-wrapper" class="panel-body msg_container_base">
-                        <div *ngFor="let message of messages" class="row msg_container base_sent">
+                        <div *ngFor="let message of messages" class="row msg_container" [ngClass]="{'base_sent': message.userCreated.id === userId, 'base_receive': message.userCreated.id !== userId }">
                             <div class="col-md-10 col-xs-10">
-                                <div class="messages msg_sent">
+                                <div class="messages" [ngClass]="{'msg_sent': message.userCreated.id === userId, 'msg_receive': message.userCreated.id !== userId }">
                                     <p>{{ message.content }}</p>
                                     <time>{{ message.userCreated.name || 'user' }} • {{ message.timeFromNow }}</time>
                                 </div>

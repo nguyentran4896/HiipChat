@@ -26,7 +26,7 @@ export class WebsocketService {
     })
 
     let observer = {
-      next: (data: Object) => {
+      next: (data: any) => {
         data = JSON.parse(data.toString());
 
         this.socket.emit('message', {

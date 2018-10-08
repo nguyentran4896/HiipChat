@@ -9,7 +9,7 @@ export class ApiService {
 
   constructor(private http: HttpClient) { }
 
-  createUser(name) {
+  createUser(name): any {
     return this.http.post('http://localhost:3000/api/v1/users', { name }).toPromise()
   }
 }
